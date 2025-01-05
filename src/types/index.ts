@@ -11,10 +11,13 @@ export interface BreedInfo {
 }
 
 // Define a new type that only includes specific properties from BreedInfo
-export type BreedInfoSubset = Pick<BreedInfo, 'id' | 'name' | 'temperament' | 'life_span' | 'bred_for' | 'breed_group'> & {
-    weight: { metric: string };
-    height: { metric: string };
-}
+export type BreedInfoSubset = Pick<
+  BreedInfo,
+  "id" | "name" | "temperament" | "life_span" | "bred_for" | "breed_group"
+> & {
+  weight: { metric: string };
+  height: { metric: string };
+};
 
 export interface BreedResponse {
   id: string;
@@ -24,10 +27,23 @@ export interface BreedResponse {
   breeds: BreedInfoSubset[];
 }
 
-
 export interface VoteBreedResponse {
   id: string;
   image_id: string;
   value: number;
-  user_id?: string;
+  message: string;
+  country_code: string;
+}
+
+export interface GetVotedBreedsResponse {
+  id: number;
+  image_id: string;
+  sub_id: string;
+  created_at: string;
+  value: number;
+  country_code: string;
+  image: {
+    id: string;
+    url: string;
+  };
 }

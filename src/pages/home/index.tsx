@@ -1,4 +1,4 @@
-import { useGetBreed } from '@/api/breedCard/use-get-breeds';
+import { useGetBreed } from '@/api/use-get-breeds';
 import Layout from '@/components/layout';
 import SwipeCard from '@/components/swipeCard';
 import * as React from 'react';
