@@ -14,6 +14,7 @@ interface ISwipeCardProps {
 }
 
 const SwipeCard: React.FunctionComponent<ISwipeCardProps> = ({ data, nextBreed }) => {
+    // State to manage the card position and opacity
     const [position, setPosition] = React.useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = React.useState(1);
     const { mutate, isPending } = useVoteBreed();
@@ -109,7 +110,6 @@ const SwipeCard: React.FunctionComponent<ISwipeCardProps> = ({ data, nextBreed }
                     style={{
                         opacity,
                         transition: "transform 0.3s ease, opacity 0.3s ease",
-                        // transform: `translate(${position.x}px, ${position.y}px)`
                     }}
                     onClick={showBreedDetail}>
                     <Card className='w-full max-w-sm select-none p-2'>

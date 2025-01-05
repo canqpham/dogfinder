@@ -12,14 +12,18 @@ const Home: React.FunctionComponent = () => {
           data={data.currentBreed}
           nextBreed={data.nextBreed}
         /> : <div>Loading...</div>}
-        <div className='mt-2 hidden lg:block'>
-          <p>
-            {data && "Swipe right if you like the breed, swipe left if you don't like the breed or click the button to like or dislike the breed"}
-          </p>
-          <p>
-            Click to breed image to see more details and click the card to see breed image again
-          </p>
-        </div>
+        {data &&
+          <div className='mt-2 hidden lg:block'>
+            <p>
+              Swipe right if you like the breed, swipe left if you don't like the breed and swipe up if you super like the breed
+            </p>
+            <p>
+              Click the button to like or dislike the breed
+            </p>
+            <p>
+              Click to breed image to see more details and click the card to see breed image again
+            </p>
+          </div>}
       </div>
     </Layout>
   );
