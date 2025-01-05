@@ -127,14 +127,29 @@ This project uses TanStack Query for data fetching and state management. TanStac
 
 ## Project Structure
 
-- **src/**: Main application source code
-- **tests/**: Test files for the application
-- **public/**: Static assets
+- **`.husky/`**: Contains Git hooks for pre-commit and other Git-related workflows.
+- **`node_modules/`**: Auto-generated folder containing project dependencies.
+- **`public/`**: Static files served by the application.
+- **`src/`**: The source code for the project.
+  - **`api/`**: Contains API-related logic or services.
+  - **`assets/`**: Static assets such as images and fonts.
+  - **`components/`**: Reusable UI components.
+  - **`lib/`**: Utility functions or libraries.
+  - **`pages/`**: Page-level components for routing.
+  - **`repository/`**: Data access logic or repository pattern implementation.
+  - **`types/`**: TypeScript type definitions.
+- **Root files**:
+  - `.env`: Environment variables.
+  - `package.json`: Project metadata and dependencies.
+  - `README.md`: Documentation for the project.
+  - `tailwind.config.js`: Tailwind CSS configuration file.
+  - `tsconfig*.json`: TypeScript configuration files.
+  - `vite.config.ts`: Configuration for Vite build tool.
+
+This structure provides an organized overview of the project's layout, helping contributors navigate and understand the codebase effectively.
 
 ---
 
 ## Troubleshooting
 
-1. **Jest Unexpected Token Error**: Ensure you have the correct Babel and Jest configurations in place.
-2. **ECMAScript Modules Issues**: This project uses ES modules (`type: "module"` in `package.json`). Ensure your Node.js version supports ES modules.
-3. **Husky Installation**: Run `npm run prepare` if Husky hooks are not working as expected.
+1. **Husky Installation**: Run `npm run prepare` if Husky hooks are not working as expected.
