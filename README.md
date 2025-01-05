@@ -10,7 +10,7 @@ Dogfinder is a modern web application designed with React and Vite. It includes 
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js** (version 16 or higher) and npm (Node Package Manager)
+- **Node.js** (version 18 or higher) and npm (Node Package Manager)
 - **Git** (to clone the repository)
 
 ---
