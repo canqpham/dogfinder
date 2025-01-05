@@ -2,15 +2,11 @@ import { useGetVotedBreeds } from '@/api/use-get-voted-breeds';
 import Layout from '@/components/layout';
 import { Checkbox } from '@/components/ui/checkbox';
 import VotedImage from '@/components/voted';
-import { GetVotedBreedsResponse } from '@/types';
 import { CheckedState } from '@radix-ui/react-checkbox';
 import * as React from 'react';
 
-interface IVotedProps {
-    data: GetVotedBreedsResponse[];
-}
 
-const Voted: React.FunctionComponent<IVotedProps> = (props) => {
+const Voted: React.FunctionComponent = () => {
     const { data, isPending } = useGetVotedBreeds();
 
     const [showLiked, setShowLiked] = React.useState(true);
