@@ -25,3 +25,7 @@ dist-ssr
 
 # lockb
 bun.lockb
+
+# env
+.env
+.env.*
