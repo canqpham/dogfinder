@@ -25,16 +25,16 @@ const BreedDetail: React.FunctionComponent<IBreedDetailProps> = ({ data }) => {
                 if (field === "height") {
                     return (
                         <div key={field} className='w-full p-2 flex flex-col gap-2 justify-start'>
-                            <p className='text-left text-xl'>{"Weight & Height"}</p>
-                            <p className='text-left text-sm'>{`${data.weight} kg - ${data.height} cm`}</p>
+                            <p className='text-left text-xl font-semibold'>{"Weight & Height"}</p>
+                            <p className='text-left text-sm pl-2'>{`${data.weight} kg - ${data.height} cm`}</p>
                         </div>
                     );
                 }
                 return (
                     data?.[field] && (
                         <div key={field} className='w-full p-2 flex flex-col gap-2 justify-start'>
-                            <p className='text-left text-xl'>{mapFieldToLabel[field]}</p>
-                            <p className='text-left text-sm'>{data?.[field] ? data?.[field] : ""}</p>
+                            <p className='text-left text-xl font-semibold'>{mapFieldToLabel[field]}</p>
+                            <p className='text-left text-sm pl-2'>{data?.[field] ? data?.[field] : ""}</p>
                         </div>
                     )
                 )
