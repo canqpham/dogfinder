@@ -153,3 +153,19 @@ This structure provides an organized overview of the project's layout, helping c
 ## Troubleshooting
 
 1. **Husky Installation**: Run `npm run prepare` if Husky hooks are not working as expected.
+
+---
+
+## Enhance
+
+1. **For main page**:
+
+- Load more 10 images in background and save to the queue, when user vote current breed, the next one will be taken from queue.
+- When the queue is less than 6 breeds, will fetch more 10 images
+
+  **Results**: improve user experience no need to wait for api too long
+
+2. **For voted latest**:
+
+- Only fetch api in the first time visit page to get 2 latest breeds which voted before
+- After each vote breed action, push breed info to list voted latest also that help to do not call api => more user friendly
