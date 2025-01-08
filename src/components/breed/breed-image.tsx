@@ -13,7 +13,7 @@ const BreedImage: React.FunctionComponent<IBreedImageProps> = ({ src, name, bred
             className='w-full max-w-sm p-2 h-[600px] flex flex-col items-end justify-end'
             style={{
                 backgroundImage: `url(${src})`,
-                backgroundSize: 'cover',
+                backgroundSize: 'contain',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
             }}

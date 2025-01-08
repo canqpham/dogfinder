@@ -1,7 +1,7 @@
 import { useGetVotedBreeds } from '@/api/use-get-voted-breeds';
 import Layout from '@/components/layout';
 import { Checkbox } from '@/components/ui/checkbox';
-import VotedImage from '@/components/voted';
+import VotedImage from '@/components/voted-image';
 import { CheckedState } from '@radix-ui/react-checkbox';
 import * as React from 'react';
 

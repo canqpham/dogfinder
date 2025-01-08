@@ -1,5 +1,5 @@
 import * as React from 'react';
-import VotedImage from '../voted';
+import VotedImage from '../voted-image';
 import { useVotedLatest } from '@/context/useVotedLatestContext';
 
 const VotedLatest: React.FunctionComponent = () => {
