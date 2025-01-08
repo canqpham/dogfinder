@@ -36,14 +36,14 @@ export interface VoteBreedResponse {
 }
 
 export interface GetVotedBreedsResponse {
-  id: number;
+  id?: number;
   image_id: string;
-  sub_id: string;
-  created_at: string;
+  sub_id?: string;
+  created_at?: string;
   value: number;
-  country_code: string;
+  country_code?: string;
   image: {
-    id: string;
+    id?: string;
     url: string;
   };
 }

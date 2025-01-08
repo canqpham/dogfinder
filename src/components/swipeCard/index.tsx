@@ -7,26 +7,36 @@ import { useVoteBreed } from '@/api/use-vote-breed';
 import BreedImage from '../breed/breed-image';
 import BreedDetail from '../breed/breed-detail';
 import Overlay from '../overlay';
+import { useVotedLatest } from '@/context/useVotedLatestContext';
 
 interface ISwipeCardProps {
-    data: BreedInfo;
-    nextBreed?: BreedInfo;
+    currentBreed: BreedInfo;
+    nextBreed?: BreedInfo | null;
+    handleVote: () => void;
 }
 
-const SwipeCard: React.FunctionComponent<ISwipeCardProps> = ({ data, nextBreed }) => {
+const SwipeCard: React.FunctionComponent<ISwipeCardProps> = ({ currentBreed, nextBreed, handleVote }) => {
     // State to manage the card position and opacity
     const [position, setPosition] = React.useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = React.useState(1);
-    const { mutate, isPending } = useVoteBreed();
+    const { mutate, isPending, isSuccess, data: votedResponse } = useVoteBreed();
     const [isDetailMode, setIsDetailMode] = React.useState(false);
     const [isDragging, setIsDragging] = React.useState(false);
     const draggableRef = React.useRef<HTMLDivElement>(null);
+    const { pushVotedBreed } = useVotedLatest();
 
     React.useEffect(() => {
         setPosition({ x: 0, y: 0 });
         setOpacity(1);
         setIsDetailMode(false);
-    }, [data.id]);
+    }, [currentBreed.id]);
+
+    React.useEffect(() => {
+        if (isSuccess) {
+            pushVotedBreed(currentBreed, votedResponse?.value);
+            handleVote();
+        }
+    }, [isSuccess, votedResponse]);
 
     const handleDislike = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation();
@@ -51,7 +61,7 @@ const SwipeCard: React.FunctionComponent<ISwipeCardProps> = ({ data, nextBreed }
         setPosition({ x: offset, y: 0 });
         setTimeout(() => {
             const value = direction === 'up' ? 2 : direction === 'left' ? -1 : 1;
-            mutate({ image_id: data.id, value });
+            mutate({ image_id: currentBreed.id, value });
         }, 300); // Adjust the timeout as needed
     };
 
@@ -114,9 +124,9 @@ const SwipeCard: React.FunctionComponent<ISwipeCardProps> = ({ data, nextBreed }
                     onClick={showBreedDetail}>
                     <Card className='w-full max-w-sm select-none p-2'>
                         {isDetailMode ?
-                            <BreedDetail data={data} />
+                            <BreedDetail data={currentBreed} />
                             :
-                            <BreedImage src={data.url} name={data.name} bredFor={data.bred_for} />
+                            <BreedImage src={currentBreed.url} name={currentBreed.name} bredFor={currentBreed.bred_for} />
                         }
                         <CardFooter className='w-full max-w-sm p-2'>
                             <div className='w-full flex justify-between'>

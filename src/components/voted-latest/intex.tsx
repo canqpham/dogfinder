@@ -1,9 +1,9 @@
 import * as React from 'react';
 import VotedImage from '../voted';
-import { useGetVotedLatestBreeds } from '@/api/use-get-voted-latest-breeds';
+import { useVotedLatest } from '@/context/useVotedLatestContext';
 
 const VotedLatest: React.FunctionComponent = () => {
-    const { data, isPending } = useGetVotedLatestBreeds();
+    const { votedBreeds, isPending } = useVotedLatest();
 
     return (
         <div className=''>
@@ -15,10 +15,9 @@ const VotedLatest: React.FunctionComponent = () => {
             {
                 isPending ? <div className='text-white'>Loading...</div> :
                     <div className='grid grid-cols-1 lg:grid-cols-1 gap-4 m-2'>
-                        {data?.map((breed) => breed.image.url && (
+                        {votedBreeds?.map((breed) => breed.image.url && (
                             <VotedImage
                                 key={breed.id}
-                                id={breed.image.id}
                                 url={breed.image.url}
                                 value={breed.value}
                             />

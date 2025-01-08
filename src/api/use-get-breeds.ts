@@ -2,7 +2,10 @@ import { BreedInfo, BreedResponse } from "@/types";
 import { getApi } from "./base";
 import { useQuery } from "@tanstack/react-query";
 
-const convertInfo = (data: BreedResponse) => {
+export const convertInfo = (data: BreedResponse) => {
+  if (!data) {
+    return null;
+  }
   const newData: BreedInfo = {
     id: data.id,
     name: data.breeds[0].name,
@@ -17,39 +20,37 @@ const convertInfo = (data: BreedResponse) => {
   return newData;
 };
 
-export const useGetBreed = () => {
+export const useGetBreeds = (
+  currentPage: number,
+  limit: number,
+  saveBreedsQueue: (data: BreedResponse[]) => void
+) => {
   const query = useQuery({
-    queryKey: ["breeds"],
+    queryKey: ["breeds", currentPage],
     queryFn: async () => {
-      const page = localStorage.getItem("page");
-      const [currentBreed, nextBreed] = await Promise.all([
-        getApi<
-          BreedResponse[],
-          { limit: number; page: number; order: string; has_breed: boolean }
-        >("/images/search", {
-          limit: 1,
-          page: page ? parseInt(page) : 1,
-          order: "ASC",
-          has_breed: true,
-        }),
-        getApi<
-          BreedResponse[],
-          { limit: number; page: number; order: string; has_breed: boolean }
-        >("/images/search", {
-          limit: 1,
-          page: page ? parseInt(page) + 1 : 2,
-          order: "ASC",
-          has_breed: true,
-        }),
-      ]);
-      console.log("use get breed", currentBreed);
-      if (!currentBreed) {
+      const data = await getApi<
+        BreedResponse[],
+        { limit: number; page: number; order: string; has_breed: boolean }
+      >("/images/search", {
+        limit: limit ?? 20,
+        page: currentPage,
+        order: "ASC",
+        has_breed: true,
+      });
+      if (!data) {
         throw new Error("Failed to fetch breed");
       }
-      return {
-        currentBreed: convertInfo(currentBreed?.[0]),
-        nextBreed: convertInfo(nextBreed?.[0]),
-      };
+      const stored = localStorage.getItem("currentBreed");
+      if (!stored) {
+        const initCurrentBreed = data[0];
+        // Save the current breed id to local storage to avoid losing the current breed when refreshing the page
+        // when first fetching the breeds
+        localStorage.setItem("currentBreed", JSON.stringify(initCurrentBreed));
+      }
+      // Save the next page to local storage to avoid losing the current page when refreshing the page
+      localStorage.setItem("nextPage", (currentPage + 1).toString());
+      saveBreedsQueue(data);
+      return data;
     },
   });
   return query;
